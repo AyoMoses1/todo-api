@@ -51,7 +51,10 @@ const getUserTodos = async(req, res) => {
       model: Todo,
       as: 'todo'
     }],
-    where: {id: req.params.id}
+    where: {id: req.params.id},
+    attributes: [
+      "id",
+    ],
   })
   res.status(200).send(data)
 }

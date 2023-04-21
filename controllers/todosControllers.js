@@ -8,10 +8,11 @@ const addTodo = async (req, res) => {
   let data = {
     title: req.body.title,
     description: req.body.description,
-    category: req.body.category,
+    category_id: req.body.category_id,
     due_date: req.body.due_date,
-    priority: req.body.priority,
+    priority_id: req.body.priority_id,
     completed: req.body.completed ? req.body.completed : false,
+    user_id: req.body.user_id
   };
   const todo = await Todo.create(data);
   res.status(201).send(todo);
@@ -22,10 +23,11 @@ const getAllTodos = async (req, res) => {
     attributes: [
       "title",
       "description",
-      "category",
+      "category_id",
       "due_date",
-      "priority",
+      "priority_id",
       "completed",
+      "user_id"
     ],
   });
   res.status(200).send(todos);
@@ -49,20 +51,20 @@ const deleteTodo = async (req, res) => {
   res.status(201).send(`todo with ${id} deleted successfully...`);
 };
 
-const getCompletedTodos = async(req, res) => {
+const getCompletedTodos = async (req, res) => {
   let todos = await Todo.findAll({
     attributes: [
       "title",
       "description",
-      "category",
+      "category_id",
       "due_date",
-      "priority",
+      "priority_id",
       "completed",
     ],
-    where : {completed: true}
+    where: { completed: true },
   });
   res.status(200).send(todos);
-}
+};
 
 module.exports = {
   addTodo,
@@ -70,5 +72,5 @@ module.exports = {
   getTodo,
   getAllTodos,
   deleteTodo,
-  getCompletedTodos
+  getCompletedTodos,
 };

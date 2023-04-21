@@ -9,16 +9,8 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.TEXT
     },
-    category: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
     due_date: {
       type: DataTypes.DATE,
-      allowNull: false
-    },
-    priority: {
-      type: DataTypes.INTEGER,
       allowNull: false
     },
     completed: {

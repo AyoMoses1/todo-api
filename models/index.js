@@ -48,4 +48,24 @@ db.todos.belongsTo(db.users, {
   as: "user"
 })
 
+db.categories.hasMany(db.todos, {
+  foreignKey: 'category_id',
+  as: 'todo'
+})
+
+db.todos.belongsTo(db.categories, {
+  foreignKey: 'category_id',
+  as: "category"
+})
+
+db.priorities.hasMany(db.todos, {
+  foreignKey: 'priority_id',
+  as: 'todo'
+})
+
+db.todos.belongsTo(db.priorities, {
+  foreignKey: 'priority_id',
+  as: "priority"
+})
+
 module.exports = db;

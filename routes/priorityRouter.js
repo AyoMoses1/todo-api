@@ -5,12 +5,15 @@ const {
   addPriority,
   deletePriority,
   getAllPriorities,
+  getPriorityTodos
 } = priorityControllers
 
 router.post("/", addPriority);
 router.get("/", getAllPriorities);
 
 router.delete("/:id", deletePriority);
+router.get("/:id/todos", getPriorityTodos);
+
 
 
 module.exports = router

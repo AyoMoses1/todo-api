@@ -1,6 +1,7 @@
 const db = require("../models");
 
 const Priority = db.priorities;
+const Todo = db.todos
 
 const addPriority = async (req, res) => {
   let data = {
@@ -23,8 +24,23 @@ const deletePriority = async (req, res) => {
   res.status(201).send(`Priority with id ${id} deleted successfully...`);
 };
 
+const getPriorityTodos = async(req, res) => {
+  const data = await Priority.findAll({
+    include: [{
+      model: Todo,
+      as: 'todo'
+    }],
+    where: {id: req.params.id},
+    attributes: [
+      "id",
+    ],
+  })
+  res.status(200).send(data)
+}
+
 module.exports = {
   addPriority,
   getAllPriorities,
   deletePriority,
+  getPriorityTodos
 };

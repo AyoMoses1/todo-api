@@ -1,6 +1,7 @@
 const db = require("../models");
 
 const Category = db.categories;
+const Todo = db.todos
 
 const addCategory = async (req, res) => {
   let data = {
@@ -36,10 +37,25 @@ const deleteCategory = async (req, res) => {
   res.status(201).send(`Category with ${id} deleted successfully...`);
 };
 
+const getCategoryTodos = async(req, res) => {
+  const data = await Category.findAll({
+    include: [{
+      model: Todo,
+      as: 'todo'
+    }],
+    where: {id: req.params.id},
+    attributes: [
+      "id",
+    ],
+  })
+  res.status(200).send(data)
+}
+
 module.exports = {
   addCategory,
   editCategory,
   getCategory,
   getAllCategories,
   deleteCategory,
+  getCategoryTodos
 };
