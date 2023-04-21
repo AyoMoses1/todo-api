@@ -1,20 +1,16 @@
-const categoryControllers = require("../controllers/categoriesControllers");
+const priorityControllers = require("../controllers/priorityControllers");
 const router = require("express").Router();
 
 const {
-  addCategory,
-  deleteCategory,
-  editCategory,
-  getAllCategories,
-  getCategory,
-} = categoryControllers
+  addPriority,
+  deletePriority,
+  getAllPriorities,
+} = priorityControllers
 
-router.post("/", addCategory);
-router.get("/", getAllCategories);
+router.post("/", addPriority);
+router.get("/", getAllPriorities);
 
-router.get("/:id", getCategory);
-router.put("/:id", editCategory);
-router.delete("/:id", deleteCategory);
+router.delete("/:id", deletePriority);
 
 
 module.exports = router

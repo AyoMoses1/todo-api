@@ -1,16 +1,12 @@
 const { sequelize } = require(".");
 
 module.exports = (sequelize, DataTypes) => {
-  const Category = sequelize.define("category", {
+  const Priority = sequelize.define("priority", {
     name: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    description: {
-      type: DataTypes.TEXT,
-      allowNull: false
-    },
   })
 
-  return Category
+  return Priority
 }

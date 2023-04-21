@@ -32,6 +32,7 @@ db.sequelize = sequelize;
 db.todos = require("./todosModel.js")(sequelize, DataTypes);
 db.categories = require("./categoriesModel.js")(sequelize, DataTypes);
 db.users = require("./usersModel.js")(sequelize, DataTypes);
+db.priorities = require("./prioritiesModel.js")(sequelize, DataTypes);
 
 db.sequelize.sync({ force: false }).then(() => {
   console.log("yes re-sync done");

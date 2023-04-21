@@ -20,10 +20,12 @@ app.use(express.urlencoded({ extended: true }));
 const todosRouter = require("./routes/todosRouter");
 const categoriesRouter = require("./routes/categoriesRouter")
 const usersRouter = require("./routes/usersRouter")
+const prioritiesRouter = require("./routes/priorityRouter")
 
 app.use("/api/v1/todos", todosRouter);
 app.use("/api/v1/categories", categoriesRouter);
 app.use("/api/v1/users", usersRouter)
+app.use("/api/v1/priorities", prioritiesRouter)
 
 // testing api
 app.get("/", (req, res) => {
