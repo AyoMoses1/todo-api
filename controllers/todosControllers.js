@@ -1,8 +1,6 @@
 const db = require("../models");
 
 const Todo = db.todos;
-const Category = db.categories;
-const User = db.users;
 
 // create Todo
 

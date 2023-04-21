@@ -17,10 +17,13 @@ app.use(express.urlencoded({ extended: true }));
 
 // routers
 
-const router = require("./routes/todosRouter");
+const todosRouter = require("./routes/todosRouter");
+const categoriesRouter = require("./routes/categoriesRouter")
+const usersRouter = require("./routes/usersRouter")
 
-app.use("/api/v1/todos", router);
-
+app.use("/api/v1/todos", todosRouter);
+app.use("/api/v1/categories", categoriesRouter);
+app.use("/api/v1/users", usersRouter)
 
 // testing api
 app.get("/", (req, res) => {
