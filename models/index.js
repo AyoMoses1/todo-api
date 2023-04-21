@@ -38,4 +38,14 @@ db.sequelize.sync({ force: false }).then(() => {
   console.log("yes re-sync done");
 });
 
+db.users.hasMany(db.todos, {
+  foreignKey: 'user_id',
+  as: 'todo'
+})
+
+db.todos.belongsTo(db.users, {
+  foreignKey: 'user_id',
+  as: "user"
+})
+
 module.exports = db;

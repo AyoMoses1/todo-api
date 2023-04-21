@@ -1,6 +1,7 @@
 const db = require("../models");
 
 const User = db.users;
+const Todo = db.todos
 
 const addUser = async (req, res) => {
   let data = {
@@ -44,10 +45,22 @@ const deleteUser = async (req, res) => {
   res.status(201).send(`user with id ${id} has been deleted successfully...`);
 };
 
+const getUserTodos = async(req, res) => {
+  const data = await User.findAll({
+    include: [{
+      model: Todo,
+      as: 'todo'
+    }],
+    where: {id: req.params.id}
+  })
+  res.status(200).send(data)
+}
+
 module.exports = {
   addUser,
   editUser,
   getUser,
   getAllUsers,
   deleteUser,
+  getUserTodos
 };
