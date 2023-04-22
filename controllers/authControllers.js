@@ -1,0 +1,57 @@
+const db = require("../models");
+const jwt = require("jsonwebtoken");
+
+const User = db.users;
+
+const registerUser = async (req, res) => {
+  const { firstName, lastName, email, mobile, password } = req.body;
+  let data = {
+    firstName,
+    lastName,
+    email,
+    mobile,
+    password,
+  };
+  // do some check to see if the data coming is accurate
+
+  const alreadyExistingUser = await User.findOne({ where: { email } });
+
+  if (alreadyExistingUser) {
+    res.status(400).json({ message: "User with email already exists" });
+  } else {
+    const user = await User.create(data).catch((err) => {
+      res.json({ error: "Cannot register user at the moment!!! " });
+    });
+    if (user) {
+      res.status(201).send(user);
+    }
+  }
+};
+
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+  const userWithEmail = await User.findOne({ where: { email } });
+  if (!userWithEmail) {
+    res.json({ message: userWithEmail.id });
+    return res.status(403).json({ message: "Email or Password doesn't exist" });
+  }
+  if (userWithEmail.password !== password) {
+    return res.status(403).json({ message: "Email or Password doesn't exist" });
+  }
+  const jwtToken = jwt.sign(
+    {
+      id: userWithEmail.id,
+      email: userWithEmail.email,
+    },
+    "XGGT_rPLYXOaq8eAl1SWE32tuGpeQIwsLOt3VheaZ"
+  );
+  res.status(200).json({
+    message: "Welcome Back",
+    token: jwtToken,
+  });
+};
+
+module.exports = {
+  registerUser,
+  loginUser,
+};
