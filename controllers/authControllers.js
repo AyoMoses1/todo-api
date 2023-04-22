@@ -32,7 +32,7 @@ const loginUser = async (req, res) => {
   const { email, password } = req.body;
   const userWithEmail = await User.findOne({ where: { email } });
   if (!userWithEmail) {
-    res.json({ message: userWithEmail.id });
+    res.json({message: userWithEmail.id})
     return res.status(403).json({ message: "Email or Password doesn't exist" });
   }
   if (userWithEmail.password !== password) {
@@ -43,7 +43,7 @@ const loginUser = async (req, res) => {
       id: userWithEmail.id,
       email: userWithEmail.email,
     },
-    "XGGT_rPLYXOaq8eAl1SWE32tuGpeQIwsLOt3VheaZ"
+    process.env.JWT_SECRET
   );
   res.status(200).json({
     message: "Welcome Back",

@@ -1,5 +1,6 @@
 const todoControllers = require("../controllers/todosControllers");
 const router = require("express").Router();
+const passport = require("passport");
 
 const {
   addTodo,
@@ -11,12 +12,11 @@ const {
 } = todoControllers;
 
 router.post("/", addTodo);
-router.get("/", getAllTodos);
-router.get("/completed", getCompletedTodos);
+router.get("/", passport.authenticate("jwt", { session: false }), getAllTodos);
+router.get("/completed", passport.authenticate("jwt", {session: false}), getCompletedTodos);
 
 router.get("/:id", getTodo);
-router.put("/:id", editTodo);
-router.delete("/:id", deleteTodo);
+router.put("/:id", passport.authenticate("jwt", { session: false }), editTodo);
+router.delete("/:id", passport.authenticate("jwt", {session: false}), deleteTodo);
 
-
-module.exports = router
+module.exports = router;

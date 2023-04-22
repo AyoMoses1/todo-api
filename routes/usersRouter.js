@@ -1,5 +1,6 @@
 const userControllers = require("../controllers/usersControllers");
 const router = require("express").Router();
+const passport = require("passport")
 
 const {
   addUser,
@@ -11,7 +12,7 @@ const {
 } = userControllers;
 
 router.post("/", addUser);
-router.get("/", getAllUsers);
+router.get("/", passport.authenticate("jwt", {session: false}), getAllUsers);
 
 router.get("/:id", getUser);
 router.put("/:id", editUser);
