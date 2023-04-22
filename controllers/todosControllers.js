@@ -5,6 +5,8 @@ const Todo = db.todos;
 // create Todo
 
 const addTodo = async (req, res) => {
+  const token = req.headers.authorization;
+  const payload = jwtDecode(token);
   let data = {
     title: req.body.title,
     description: req.body.description,
@@ -12,7 +14,7 @@ const addTodo = async (req, res) => {
     due_date: req.body.due_date,
     priority_id: req.body.priority_id,
     completed: req.body.completed ? req.body.completed : false,
-    user_id: req.body.user_id,
+    user_id: payload.id,
   };
   const todo = await Todo.create(data);
   res.status(201).json({todo});

@@ -3,7 +3,6 @@ const router = require("express").Router();
 const passport = require("passport")
 
 const {
-  addUser,
   deleteUser,
   editUser,
   getAllUsers,
@@ -11,7 +10,6 @@ const {
   getUserTodos
 } = userControllers;
 
-router.post("/", addUser);
 router.get("/", passport.authenticate("jwt", {session: false}), getAllUsers);
 
 router.get("/:id", getUser);

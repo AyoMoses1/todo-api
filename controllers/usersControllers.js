@@ -3,18 +3,6 @@ const db = require("../models");
 const User = db.users;
 const Todo = db.todos
 
-const addUser = async (req, res) => {
-  let data = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    mobile: req.body.mobile,
-    password: req.body.password,
-  };
-  const todo = await User.create(data);
-  res.status(201).send(todo);
-};
-
 const getAllUsers = async (req, res) => {
   let users = await User.findAll({
     attributes: [
@@ -60,7 +48,6 @@ const getUserTodos = async(req, res) => {
 }
 
 module.exports = {
-  addUser,
   editUser,
   getUser,
   getAllUsers,
