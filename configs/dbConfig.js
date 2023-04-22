@@ -1,8 +1,8 @@
 module.exports = {
-  HOST: 'localhost',
-  USER: 'root',
-  PASSWORD: '',
-  DB: 'todos_db',
+  HOST: 'sql9.freemysqlhosting.net',
+  USER: 'sql9613965',
+  PASSWORD: 'K3jwHp1VM8',
+  DB: 'sql9613965',
   dialect: 'mysql',
 
   pool: {
