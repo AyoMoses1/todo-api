@@ -15,9 +15,8 @@ const registerUser = async (req, res) => {
   // do some check to see if the data coming is accurate
 
   const alreadyExistingUser = await User.findOne({ where: { email } });
-
   if (alreadyExistingUser) {
-    return res.status(400).json({ message: "User with email already exists" });
+    return res.status(400).send({ message: "User with email already exists" });
   } else {
     const user = await User.create(data).catch((err) => {
       res.json({ error: "Cannot register user at the moment!!! " });
@@ -47,6 +46,7 @@ const loginUser = async (req, res) => {
   res.status(200).json({
     message: "Welcome Back",
     token: jwtToken,
+    name: userWithEmail.firstName,
   });
 };
 
